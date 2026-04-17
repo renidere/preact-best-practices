@@ -25,4 +25,14 @@ const onSubmit = () => submitForm(authToken);
 const onSubmit = () => submitForm(useAuthStore.getState().token);
 ```
 
+> This pattern is safe in **synchronous** callbacks where the value is read immediately. In an `async` callback, `getState()` after an `await` reads the store at an unpredictable point in time — the value may have changed between the call site and the `await` resolution. For async work, capture the value **before** the first `await`:
+
+```typescript
+const onSubmit = async () => {
+  const token = useAuthStore.getState().token
+  await validate()
+  submitForm(token)
+}
+```
+
 Reference: [Zustand getState](https://zustand.docs.pmnd.rs/docs/api/getState)
