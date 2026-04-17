@@ -1,0 +1,4 @@
+interface:
+  display_name: "Preact Best Practices"
+  short_description: "Review and refactor company Preact apps with compat-safe performance guidance"
+  default_prompt: "Use $preact-best-practices when reviewing or refactoring company Preact + TypeScript apps that rely on compat-sensitive React ecosystem libraries."

@@ -1,0 +1,5 @@
+Copyright (c) 2026 Transported Labs Frontend.
+
+This skill and its bundled materials are proprietary and intended for internal
+or explicitly approved use. Redistribution, sublicensing, or public reuse is
+not permitted without prior written approval from Transported Labs.

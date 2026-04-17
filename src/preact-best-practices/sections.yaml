@@ -1,0 +1,56 @@
+sections:
+  - id: guard
+    title: Guardrails and Scope
+    impact: HIGH
+    order: 0
+    prefix: guard-
+    description: Prevent expensive framework churn, incompatible recommendations, and over-eager rewrites.
+
+  - id: async
+    title: Async and Data Flow
+    impact: CRITICAL
+    order: 1
+    prefix: async-
+    description: Waterfalls and unnecessary sequential awaits are usually the highest-value fixes in company Preact screens and setup flows.
+
+  - id: bundle
+    title: Bundle and Loading Hygiene
+    impact: CRITICAL
+    order: 2
+    prefix: bundle-
+    description: Reduce unnecessary initial work by controlling imports, optional features, and third-party loading.
+
+  - id: compat
+    title: Compatibility and Integration
+    impact: HIGH
+    order: 3
+    prefix: compat-
+    description: Preserve the existing balance between Preact-native code and React ecosystem libraries.
+
+  - id: client
+    title: Client Data and Storage
+    impact: MEDIUM-HIGH
+    order: 4
+    prefix: client-
+    description: Persisted browser data needs versioning, minimization, and failure handling to stay safe across releases.
+
+  - id: rerender
+    title: Store and Re-render Shape
+    impact: MEDIUM-HIGH
+    order: 5
+    prefix: rerender-
+    description: Fix broad subscriptions, effect-mirrored state, and callback-driven rerender triggers. Apply when the code shows a clear anti-pattern or there is an observable performance symptom.
+
+  - id: rendering
+    title: Rendering and Browser Work
+    impact: MEDIUM
+    order: 6
+    prefix: rendering-
+    description: Improve browser work on real UI paths after data flow and subscriptions are already sane. Apply only when there is an observable rendering symptom.
+
+  - id: js
+    title: JavaScript Hot Paths
+    impact: LOW-MEDIUM
+    order: 7
+    prefix: js-
+    description: Apply JavaScript micro-optimizations only where a profiler identifies a concrete hot path and the change produces a measurable improvement.

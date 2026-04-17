@@ -1,0 +1,18 @@
+[
+  {
+    "query": "We use Preact with Zustand and MUI through compat. Can you review this component for safe performance wins and tell me if any advice would break the current stack assumptions?",
+    "should_trigger": true
+  },
+  {
+    "query": "please refactor this preact route. it fetches user, config and feature flags one after another and also stores way too much stuff in localStorage",
+    "should_trigger": true
+  },
+  {
+    "query": "Can you build a full-bleed landing page in React with strong typography and tasteful motion?",
+    "should_trigger": false
+  },
+  {
+    "query": "Review this backend Node worker for retry logic and queue throughput.",
+    "should_trigger": false
+  }
+]

@@ -1,0 +1,10 @@
+{
+  "expected_rules": [
+    "rerender-narrow-store-selectors",
+    "rerender-derived-state-no-effect"
+  ],
+  "notes": [
+    "The review should focus on selector shape and derived state first.",
+    "Generic useMemo or useCallback advice should not be the main finding."
+  ]
+}

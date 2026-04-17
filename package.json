@@ -1,0 +1,18 @@
+{
+  "name": "preact-best-practices-skill-authoring",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build:skill": "tsx scripts/build-skill.ts",
+    "validate:skill": "tsx scripts/validate-skill.ts",
+    "install:skill": "tsx scripts/install-symlinks.ts"
+  },
+  "devDependencies": {
+    "@types/node": "^24.6.0",
+    "fast-glob": "^3.3.3",
+    "gray-matter": "^4.0.3",
+    "tsx": "^4.20.6",
+    "typescript": "^5.9.3",
+    "yaml": "^2.8.1"
+  }
+}

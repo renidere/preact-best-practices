@@ -1,0 +1,33 @@
+{
+  "skill_name": "preact-best-practices",
+  "evals": [
+    {
+      "id": "review-async-waterfall",
+      "mode": "review",
+      "prompt": "Review this Preact screen for the most important correctness, compatibility, and performance issues. Prioritize high-impact findings first.",
+      "files": ["evals/fixtures/review-async-waterfall/input.tsx"],
+      "expected_output": "The review should identify the async waterfall and point to the relevant async rule before lower-value micro-optimizations."
+    },
+    {
+      "id": "review-wide-selector",
+      "mode": "review",
+      "prompt": "Review this Preact + Zustand component and call out the highest-value rerender issues without proposing architecture churn.",
+      "files": ["evals/fixtures/review-wide-selector/input.tsx"],
+      "expected_output": "The review should flag broad selector shape and effect-mirrored state before generic memoization advice."
+    },
+    {
+      "id": "refactor-derived-state",
+      "mode": "refactor",
+      "prompt": "Refactor this component to remove unnecessary rerender work while preserving the current stack and behavior.",
+      "files": ["evals/fixtures/refactor-derived-state/input.tsx"],
+      "expected_output": "The refactor should derive cheap state during render and keep interaction logic out of effects when possible."
+    },
+    {
+      "id": "refactor-compat-boundary",
+      "mode": "refactor",
+      "prompt": "Refactor this compat-sensitive file with minimal churn. Improve correctness and performance without changing the import model unless it is actually broken.",
+      "files": ["evals/fixtures/refactor-compat-boundary/input.tsx"],
+      "expected_output": "The refactor should preserve compat boundaries, avoid signals, and fix the actual issues instead of rewriting the stack."
+    }
+  ]
+}

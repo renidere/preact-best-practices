@@ -1,0 +1,7 @@
+{
+  "expected_rules": ["async-parallel"],
+  "notes": [
+    "Independent async work should be started together.",
+    "The review should not lead with low-value memoization advice."
+  ]
+}

@@ -1,0 +1,50 @@
+name: preact-best-practices
+version: 3.2.0
+description: >
+  Use when writing, reviewing, or refactoring Preact, preact/hooks,
+  preact/compat, Vite, Zustand, MUI, or React-ecosystem integrations
+  in company Preact + TypeScript apps. Preserve compat assumptions,
+  follow existing patterns, and apply only framework-safe performance rules.
+license: Proprietary. See LICENSE.txt.
+compatibility: >
+  Company Preact + Vite + TypeScript applications that rely on React-oriented
+  libraries such as Zustand, MUI, react-hook-form, and lexical.
+organization: Transported Labs Frontend
+date: April 2026
+abstract: >
+  Structured guidance for company Preact applications built with Vite and
+  TypeScript that also rely on React-oriented libraries such as MUI,
+  react-hook-form, lexical, and Zustand. The skill keeps a short runtime
+  trigger layer, modular rule files grouped by priority, and deeper references
+  for review order, gotchas, and rationale.
+metadata:
+  author: Transported Labs Frontend
+  audience: coding-agents
+  organization: Transported Labs Frontend
+optimizationOrder:
+  - Prevent framework churn and preserve compatibility boundaries.
+  - Remove async waterfalls.
+  - Fix bundle and loading mistakes.
+  - Preserve compat boundaries and verify React-oriented API support.
+  - Keep browser storage and persisted client data disciplined.
+  - Narrow subscriptions and rerender triggers.
+  - Improve browser rendering only on real UI paths.
+  - Use JavaScript micro-optimizations only on proven hot paths.
+references:
+  - https://preactjs.com/guide/v10/getting-started/
+  - https://preactjs.com/guide/v10/differences-to-react/
+  - https://preactjs.com/guide/v10/switching-to-preact/
+  - https://vite.dev/guide/
+  - https://zustand.docs.pmnd.rs/getting-started/introduction
+  - https://mui.com/material-ui/getting-started/
+  - https://react.dev/learn/queueing-a-series-of-state-updates
+  - https://react.dev/learn/preserving-and-resetting-state
+  - https://react.dev/learn/synchronizing-with-effects
+  - https://react.dev/reference/react/useMemo
+  - https://react.dev/reference/react/useEffectEvent
+  - https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/all
+  - https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener
+  - https://developer.mozilla.org/en-US/docs/Web/HTML/Element/script
+  - https://web.dev/articles/content-visibility
+  - https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage
+  - https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map

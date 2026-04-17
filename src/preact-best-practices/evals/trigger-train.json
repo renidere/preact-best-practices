@@ -1,0 +1,26 @@
+[
+  {
+    "query": "i'm reviewing a preact + vite settings screen and it got messy after we added zustand selectors, some localStorage persistence, and a bunch of effects that mirror state. can you review it without changing the overall architecture?",
+    "should_trigger": true
+  },
+  {
+    "query": "Need a review of this compat-heavy Preact page before we ship. It uses MUI, preact/compat, lazy imports, and a few async setup calls that might be serial.",
+    "should_trigger": true
+  },
+  {
+    "query": "my manager wants this vite preact dashboard cleaned up but we are not doing a framework rewrite. please check bundle mistakes, rerenders, and whether the store subscriptions are too broad",
+    "should_trigger": true
+  },
+  {
+    "query": "Can you help me optimize a Next.js app with server actions, React cache, and route-level dynamic imports?",
+    "should_trigger": false
+  },
+  {
+    "query": "Write a TypeScript helper that turns a union into an intersection.",
+    "should_trigger": false
+  },
+  {
+    "query": "I have a React Native screen with Redux selectors and a slow FlatList. Please profile it.",
+    "should_trigger": false
+  }
+]
