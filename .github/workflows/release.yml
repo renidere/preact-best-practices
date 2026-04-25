@@ -94,7 +94,7 @@ jobs:
           )
 
       - name: Publish npm package
-        if: steps.freshness.outputs.should_release == 'true' && env.NPM_TOKEN != ''
+        if: steps.freshness.outputs.should_release == 'true' && secrets.NPM_TOKEN != ''
         run: npm publish
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
