@@ -29,6 +29,7 @@ jobs:
         with:
           node-version: 24.15.0
           cache: npm
+          registry-url: https://registry.npmjs.org
 
       - name: Install dependencies
         run: npm ci
@@ -64,13 +65,40 @@ jobs:
         if: steps.freshness.outputs.should_release == 'true'
         run: npm run build:skill
 
+      - name: Smoke test installer
+        if: steps.freshness.outputs.should_release == 'true'
+        run: npm run test:installer
+
+      - name: Refresh package lockfile
+        if: steps.freshness.outputs.should_release == 'true'
+        run: npm install --package-lock-only
+
       - name: Commit release metadata
         if: steps.freshness.outputs.should_release == 'true'
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add src/preact-best-practices/manifest.yaml
+          git add src/preact-best-practices/manifest.yaml package.json package-lock.json
           git commit -m "chore(release): ${{ steps.release_meta.outputs.tag }} [skip ci]"
+
+      - name: Archive built skill
+        if: steps.freshness.outputs.should_release == 'true'
+        run: |
+          bundle_dir="release-assets/preact-best-practices-${{ steps.release_meta.outputs.version }}"
+          mkdir -p "${bundle_dir}"
+          cp README.md package.json "${bundle_dir}/"
+          cp -R bin config dist "${bundle_dir}/"
+          (
+            cd release-assets
+            zip -r "${{ steps.release_meta.outputs.asset_name }}" "preact-best-practices-${{ steps.release_meta.outputs.version }}"
+          )
+
+      - name: Publish npm package
+        if: steps.freshness.outputs.should_release == 'true' && env.NPM_TOKEN != ''
+        run: npm publish
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Push release commit and tag
         if: steps.freshness.outputs.should_release == 'true'
@@ -78,12 +106,6 @@ jobs:
           git tag -a "${{ steps.release_meta.outputs.tag }}" -m "Release ${{ steps.release_meta.outputs.tag }}"
           git push origin HEAD:main
           git push origin "${{ steps.release_meta.outputs.tag }}"
-
-      - name: Archive built skill
-        if: steps.freshness.outputs.should_release == 'true'
-        run: |
-          mkdir -p release-assets
-          zip -r "release-assets/${{ steps.release_meta.outputs.asset_name }}" dist/preact-best-practices
 
       - name: Publish GitHub Release
         uses: softprops/action-gh-release@v2
