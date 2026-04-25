@@ -43,6 +43,17 @@ Several portable performance rule ideas and example blocks are adapted from `ver
 4. Inspect `dist/preact-best-practices/`
 5. Optionally run `npm run install:skill` to symlink the built artifact into local `.agents`, `.claude`, and `.opencode` folders for testing
 
+## Release Flow
+
+- merge approved changes into `main`
+- GitHub Actions will automatically bump the patch version in `src/preact-best-practices/manifest.yaml`
+- the release workflow will commit the new version back to `main`, create a matching git tag, build `dist/preact-best-practices`, and publish a GitHub Release with a zip artifact
+
+For this to work in GitHub repository settings:
+
+- Actions permissions must allow read and write access for `GITHUB_TOKEN`
+- branch protection or rulesets for `main` must allow `github-actions[bot]` to push the automated release commit
+
 ## Design Goals
 
 - keep the runtime skill specific to company Preact apps

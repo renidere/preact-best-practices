@@ -1,5 +1,9 @@
+dist/
+
 node_modules/
+.history/
 .tmp/
+
 .agents/
 .claude/
 .opencode/
