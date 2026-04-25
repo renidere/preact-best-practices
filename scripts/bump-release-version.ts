@@ -3,17 +3,21 @@ import path from 'node:path'
 import { repoRoot } from './lib/skill.js'
 
 const manifestPath = path.join(repoRoot, 'src', 'preact-best-practices', 'manifest.yaml')
+const packageJsonPath = path.join(repoRoot, 'package.json')
 const dryRun = process.argv.includes('--dry-run')
 
 async function main(): Promise<void> {
   const rawManifest = await fs.readFile(manifestPath, 'utf8')
+  const rawPackageJson = await fs.readFile(packageJsonPath, 'utf8')
   const currentVersion = readCurrentVersion(rawManifest)
   const nextVersion = bumpPatchVersion(currentVersion)
   const nextDate = formatReleaseDate(new Date())
   const nextManifest = updateManifest(rawManifest, nextVersion, nextDate)
+  const nextPackageJson = updatePackageJson(rawPackageJson, nextVersion)
 
   if (!dryRun) {
     await fs.writeFile(manifestPath, nextManifest, 'utf8')
+    await fs.writeFile(packageJsonPath, nextPackageJson, 'utf8')
   }
 
   process.stdout.write(nextVersion)
@@ -46,6 +50,12 @@ function bumpPatchVersion(version: string): string {
 function updateManifest(rawManifest: string, nextVersion: string, nextDate: string): string {
   const withNextVersion = replaceRequiredLine(rawManifest, /^version:\s*.*$/m, `version: ${nextVersion}`, 'version')
   return withNextVersion.replace(/^date:\s*.*$/m, `date: ${nextDate}`)
+}
+
+function updatePackageJson(rawPackageJson: string, nextVersion: string): string {
+  const packageJson = JSON.parse(rawPackageJson) as { version?: string }
+  packageJson.version = nextVersion
+  return `${JSON.stringify(packageJson, null, 2)}\n`
 }
 
 function replaceRequiredLine(

@@ -2,7 +2,7 @@
 
 ## Purpose
 
-This repository authors and packages the installable `preact-best-practices` skill.
+This repository authors the installable `preact-best-practices` skill and publishes a multi-client npm installer package.
 
 Edit the source model under `src/preact-best-practices/`. Do not treat this root `AGENTS.md` as runtime skill content.
 
@@ -19,6 +19,7 @@ Edit the source model under `src/preact-best-practices/`. Do not treat this root
 ## Generated Files
 
 - `dist/preact-best-practices/` is generated output
+- `bin/preact-best-practices.mjs` is the npm installer CLI entrypoint
 - never hand-edit files in `dist/`
 - regenerate runtime artifacts with `npm run build:skill`
 - if generated output is wrong, fix the source files or the build scripts instead of patching `dist/`
@@ -28,7 +29,10 @@ Edit the source model under `src/preact-best-practices/`. Do not treat this root
 1. `npm install`
 2. `npm run validate:skill`
 3. `npm run build:skill`
-4. `npm run install:skill`
+4. `npm run test:installer`
+5. `npm run install:skill:local`
+6. `npx preact-best-practices@latest install`
+7. `npx preact-best-practices@latest install --target opencode`
 
 ## Editing Workflow
 
@@ -51,4 +55,5 @@ Edit the source model under `src/preact-best-practices/`. Do not treat this root
 - the root repo should not contain a hand-authored runtime `SKILL.md`
 - the root repo should not contain top-level runtime `rules/`
 - the installable artifact lives in `dist/preact-best-practices/`
-- local multi-tool test installs are symlinked into repo-local `.agents/`, `.claude/`, and `.opencode/`
+- the npm package version must match `src/preact-best-practices/manifest.yaml`
+- local authoring installs are driven by `config/install-targets.json` and symlinked into repo-local OpenCode and Claude folders

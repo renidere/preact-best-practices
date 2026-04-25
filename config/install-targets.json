@@ -1,0 +1,30 @@
+{
+  "targets": [
+    {
+      "id": "opencode",
+      "label": "OpenCode",
+      "defaultConfigDir": "~/.config/opencode",
+      "configDirEnv": "OPENCODE_CONFIG_DIR",
+      "detectExecutables": [
+        "opencode"
+      ],
+      "skillsSubdir": "skills",
+      "localTestParent": ".opencode/skills",
+      "legacyMetadataFiles": [
+        ".opencode-install.json"
+      ]
+    },
+    {
+      "id": "claude",
+      "label": "Claude",
+      "defaultConfigDir": "~/.claude",
+      "configDirEnv": "CLAUDE_CONFIG_DIR",
+      "detectExecutables": [
+        "claude"
+      ],
+      "skillsSubdir": "skills",
+      "localTestParent": ".claude/skills",
+      "legacyMetadataFiles": []
+    }
+  ]
+}

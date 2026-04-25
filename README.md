@@ -1,6 +1,6 @@
 # Preact Best Practices
 
-Authoring repository for the installable `preact-best-practices` skill.
+Authoring repository and npm installer package for the installable `preact-best-practices` skill.
 
 This repo now follows a clean `authoring repo -> generated skill artifact` model:
 
@@ -10,11 +10,57 @@ This repo now follows a clean `authoring repo -> generated skill artifact` model
 
 Several portable performance rule ideas and example blocks are adapted from `vercel-react-best-practices`, then filtered through company guardrails for `Preact + Vite + TypeScript + React-ecosystem` apps.
 
+## Install And Update
+
+The published npm package is `preact-best-practices`, and the installer supports multiple targets from the same artifact.
+
+Supported presets:
+
+- `opencode` -> `~/.config/opencode/skills/preact-best-practices/`
+- `claude` -> `~/.claude/skills/preact-best-practices/`
+
+Standard install commands:
+
+1. `npx preact-best-practices@latest install`
+2. `npx preact-best-practices@latest install --target opencode`
+3. `npx preact-best-practices@latest install --target claude`
+4. `npx preact-best-practices@latest install --all`
+5. `npx preact-best-practices@latest install --skills-dir ~/.my-tool/skills`
+
+Inspection and removal:
+
+1. `npx preact-best-practices@latest status`
+2. `npx preact-best-practices@latest status --target opencode`
+3. `npx preact-best-practices@latest uninstall --target claude`
+4. `npx preact-best-practices@latest targets`
+5. `npx preact-best-practices@latest targets --detected`
+
+`install` now defaults to the same safe autodetect behavior as `install --auto`.
+
+`uninstall` still requires an explicit destination via `--target`, `--all`, or `--skills-dir`, so destructive operations never guess.
+
+Autodetect trusts only strong signals: a supported CLI executable in `PATH` or an existing skill install at the standard target path.
+
+If you want to inspect what autodetect sees, run `npx preact-best-practices@latest targets --detected`.
+
+`install --auto` is kept as an explicit alias of bare `install` for scripts or documentation that prefer the behavior to be spelled out.
+
+For a compatible tool that uses a different skills directory:
+
+1. `npx preact-best-practices@latest install --skills-dir ~/.my-tool/skills`
+
+For testing against a non-default config directory for a known preset:
+
+1. `npx preact-best-practices@latest install --target opencode --config-dir /tmp/opencode-test`
+
+The GitHub Release zip now ships the same `bin/`, `config/`, and `dist/` bundle, so users can also unpack it and run `node bin/preact-best-practices.mjs install ...` without going through npm.
+
 ## Repo Model
 
 - `src/preact-best-practices/` - canonical source of truth
 - `dist/preact-best-practices/` - generated installable artifact
-- `scripts/` - build, validate, and local install helpers
+- `scripts/` - build, validate, installer test, and local authoring helpers
+- `config/install-targets.json` - shared install target registry for published and local installs
 - `docs/authoring/` - authoring-only docs and templates
 
 ## Source Layout
@@ -26,28 +72,30 @@ Several portable performance rule ideas and example blocks are adapted from `ver
 - `references/*.md` - deeper runtime references loaded on demand
 - `examples/` - human-readable trigger examples
 - `evals/` - trigger and output eval seeds
-- `vendors/openai.yaml` - Codex-specific adapter metadata
+- `vendors/openai.yaml` - vendor-specific adapter metadata
 
 ## Commands
 
 1. `npm install`
 2. `npm run validate:skill`
 3. `npm run build:skill`
-4. `npm run install:skill`
+4. `npm run test:installer`
+5. `npm run install:skill:local`
 
 ## Workflow
 
 1. Edit source files under `src/preact-best-practices/`
 2. Run `npm run validate:skill`
 3. Run `npm run build:skill`
-4. Inspect `dist/preact-best-practices/`
-5. Optionally run `npm run install:skill` to symlink the built artifact into local `.agents`, `.claude`, and `.opencode` folders for testing
+4. Run `npm run test:installer`
+5. Inspect `dist/preact-best-practices/`
+6. Optionally run `npm run install:skill:local` to symlink the built artifact into repo-local OpenCode and Claude folders for authoring-time testing
 
 ## Release Flow
 
 - merge approved changes into `main`
-- GitHub Actions will automatically bump the patch version in `src/preact-best-practices/manifest.yaml`
-- the release workflow will commit the new version back to `main`, create a matching git tag, build `dist/preact-best-practices`, and publish a GitHub Release with a zip artifact
+- GitHub Actions will automatically bump the patch version in `src/preact-best-practices/manifest.yaml` and the npm package version in `package.json`
+- the release workflow will commit the new version back to `main`, create a matching git tag, build `dist/preact-best-practices`, publish the npm installer package when `NPM_TOKEN` is configured, and publish a GitHub Release with a portable installer bundle zip
 
 For this to work in GitHub repository settings:
 
