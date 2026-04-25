@@ -2,8 +2,17 @@
   "name": "preact-best-practices-skill-authoring",
   "private": true,
   "type": "module",
+  "engines": {
+    "node": "24.x",
+    "npm": "11.x"
+  },
+  "volta": {
+    "node": "24.15.0",
+    "npm": "11.12.1"
+  },
   "scripts": {
     "build:skill": "tsx scripts/build-skill.ts",
+    "release:bump": "tsx scripts/bump-release-version.ts",
     "validate:skill": "tsx scripts/validate-skill.ts",
     "install:skill": "tsx scripts/install-symlinks.ts"
   },
