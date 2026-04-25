@@ -1,6 +1,6 @@
 {
   "name": "preact-best-practices",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Multi-target installer for the preact-best-practices skill",
   "license": "UNLICENSED",
   "type": "module",

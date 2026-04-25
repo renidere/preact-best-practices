@@ -1,5 +1,5 @@
 name: preact-best-practices
-version: 1.0.1
+version: 1.0.2
 description: >
   Use when writing, reviewing, or refactoring Preact, preact/hooks,
   preact/compat, Vite, Zustand, MUI, or React-ecosystem integrations
